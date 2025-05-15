@@ -9,4 +9,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-buvyhhvhv
+```{r}
+#Generació Summarized Experiment:
+library(readr)
+install.packages("EnsDb.Hsapiens.v86")
+count_matrix <- read.csv("/Users/noegragerajimenez/Documents/NOE_PAC2_DADESOMIQUES/GSE161731_counts.csv")
+metadata <- read.csv("/Users/noegragerajimenez/Documents/NOE_PAC2_DADESOMIQUES/GSE161731_counts_key.csv")
+anotations <- 
+```
+
