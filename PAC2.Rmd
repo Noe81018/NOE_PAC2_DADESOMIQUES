@@ -12,9 +12,31 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 #Generació Summarized Experiment:
 library(readr)
-install.packages("EnsDb.Hsapiens.v86")
+library(EnsDb.Hsapiens.v86)
+library(SummarizedExperiment)
+
 count_matrix <- read.csv("/Users/noegragerajimenez/Documents/NOE_PAC2_DADESOMIQUES/GSE161731_counts.csv")
 metadata <- read.csv("/Users/noegragerajimenez/Documents/NOE_PAC2_DADESOMIQUES/GSE161731_counts_key.csv")
-anotations <- 
+
+metadata <- data.frame(metadata)
+metadata
+colnames(count_matrix) <- gsub("^X","", colnames(count_matrix))
+count_matrix
+
+
+filtrage <- list(metadata$rna_id)
+filtrage
+count_matrix[filtrage]
+
+gens<- genes(EnsDb.Hsapiens.v86) #sacar genes d'aquesta base
+gens_comuns <- subset(gens, gene_id %in% count_matrix$X) #Filtrar de los genes los que se encuentran aqui
+gens_comuns
+
+#SummarizedExperiment:
+se <-  SummarizedExperiment(
+  assay= SimpleList(counts=usas.matrix(count_matrix)),
+  rowRanges=gens_comuns,
+  colData = metadata
+)
 ```
 
